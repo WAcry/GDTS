@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GDTS/src/config"
+	"GDTS/config"
 	"fmt"
 	"os/exec"
 )
