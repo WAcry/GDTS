@@ -1,0 +1,9 @@
+package pretty
+
+    import "utils/kr/pretty"
+
+    Package pretty provides pretty-printing for Go values.
+
+Documentation
+
+    http://godoc.org/utils/kr/pretty

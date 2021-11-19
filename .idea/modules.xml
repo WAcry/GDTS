@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GDTS.iml" filepath="$PROJECT_DIR$/.idea/GDTS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gopath/.idea/gopath.iml" filepath="$PROJECT_DIR$/gopath/.idea/gopath.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/.idea/src.iml" filepath="$PROJECT_DIR$/src/.idea/src.iml" />
     </modules>
   </component>
 </project>

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"GDTS/utils/gorhill/cronexpr"
 	"fmt"
 	"time"
+	"utils/gorhill/cronexpr"
 )
 
 // CronJob represents a cron job
