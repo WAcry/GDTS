@@ -77,4 +77,7 @@ func main() {
 			}
 		}
 	}()
+
+	// sleep so the child goroutine can run for 100 seconds
+	time.Sleep(100 * time.Second)
 }
