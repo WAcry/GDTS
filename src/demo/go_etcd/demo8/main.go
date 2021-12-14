@@ -1,8 +1,8 @@
 package main
 
 import (
-	"config"
 	"context"
+	"demo/config"
 	"fmt"
 	"time"
 	"utils/coreos/etcd/clientv3"
@@ -21,7 +21,7 @@ func main() {
 
 	// client config
 	conf = clientv3.Config{
-		Endpoints: []string{config.Server["etcd"]},
+		Endpoints: []string{config.ETCD_SERVER},
 		//Endpoints:   []string{"21.281.122.24:2379", "21.281.122.39:2379", "21.281.122.21:2379"}, // cluster endpoints
 		DialTimeout: 5 * time.Second,
 	}

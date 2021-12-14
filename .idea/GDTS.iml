@@ -6,7 +6,5 @@
     <content url="file://$MODULE_DIR$/utils/mongodb/mongo-go-driver/vendor" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="gopath" />
-    <orderEntry type="module" module-name="src" />
   </component>
 </module>

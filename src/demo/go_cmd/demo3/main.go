@@ -1,8 +1,8 @@
 package main
 
 import (
-	"config"
 	"context"
+	"demo/config"
 	"fmt"
 	"os/exec"
 	"time"
@@ -38,7 +38,7 @@ func main() {
 			output []byte
 			err    error
 		)
-		cmd = exec.CommandContext(ctx, config.Path["bash"], "-c", "/usr/bin/sleep 2;echo hello;")
+		cmd = exec.CommandContext(ctx, config.BASH_PATH, "-c", "/usr/bin/sleep 2;echo hello;")
 
 		// execute command, capture the output
 		output, err = cmd.CombinedOutput()
