@@ -3,6 +3,8 @@ package config
 var (
 	ETCD_SERVER = "192.168.83.140:2379"
 
+	MONGODB_URL = "mongodb://192.168.83.140:27017"
+
 	BASH_PATH = "C:\\cygwin64\\bin\\bash.exe"
 	// BASH_PATH = "/bin/bash"
 
