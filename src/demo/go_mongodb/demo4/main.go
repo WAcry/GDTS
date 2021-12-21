@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"demo/config"
 	"fmt"
 	"time"
 	"utils/mongodb/mongo-go-driver/mongo"
@@ -41,7 +42,7 @@ func main() {
 		record     *LogRecord
 	)
 	// 1, connect to mongodb
-	if client, err = mongo.Connect(context.TODO(), "mongodb://36.111.184.221:27017", clientopt.ConnectTimeout(5*time.Second)); err != nil {
+	if client, err = mongo.Connect(context.TODO(), config.MONGODB_URL, clientopt.ConnectTimeout(5*time.Second)); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -56,7 +57,7 @@ func main() {
 	cond = &FindByJobName{JobName: "job10"} // {"jobName": "job10"}
 
 	// 5. query (filter + pagination parameters)
-	if cursor, err = collection.Find(context.TODO(), cond, findopt.Skip(0), findopt.Limit(2)); err != nil {
+	if cursor, err = collection.Find(context.TODO(), cond, findopt.Skip(0), findopt.Limit(2)); err != nil { // pagination parameters (start=0, limit=2)
 		fmt.Println(err)
 		return
 	}
