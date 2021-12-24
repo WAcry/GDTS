@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"demo/config"
 	"fmt"
 	"time"
 	"utils/mongodb/mongo-go-driver/mongo"
@@ -29,7 +30,7 @@ func main() {
 		delResult  *mongo.DeleteResult
 	)
 	// 1, connect to mongodb
-	if client, err = mongo.Connect(context.TODO(), "mongodb://36.111.184.221:27017", clientopt.ConnectTimeout(5*time.Second)); err != nil {
+	if client, err = mongo.Connect(context.TODO(), config.MONGODB_URL, clientopt.ConnectTimeout(5*time.Second)); err != nil {
 		fmt.Println(err)
 		return
 	}
