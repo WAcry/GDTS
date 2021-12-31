@@ -18,7 +18,7 @@ type TimePoint struct {
 
 // LogRecord record of log
 type LogRecord struct {
-	JobName   string    `bson:"jobName"`   // task name
+	JobName   string    `bson:"jobName"`   // job name
 	Command   string    `bson:"command"`   // shell command
 	Err       string    `bson:"err"`       // error info
 	Content   string    `bson:"content"`   // output of shell command
@@ -29,9 +29,9 @@ func main() {
 	var (
 		client     *mongo.Client
 		err        error
-		database   *mongo.Database
+		db         *mongo.Database
 		collection *mongo.Collection
-		record     *LogRecord
+		rec        *LogRecord
 		result     *mongo.InsertOneResult
 		docId      objectid.ObjectID
 	)
@@ -41,14 +41,14 @@ func main() {
 		return
 	}
 
-	// 2, choose database cron (init before)
-	database = client.Database("cron")
+	// 2, choose db cron (init before)
+	db = client.Database("cron")
 
 	// 3, choose collection log (init before)
-	collection = database.Collection("log")
+	collection = db.Collection("log")
 
-	// 4, insert record(bson)
-	record = &LogRecord{
+	// 4, insert rec(bson)
+	rec = &LogRecord{
 		JobName:   "job10",
 		Command:   "echo hello",
 		Err:       "",
@@ -56,7 +56,7 @@ func main() {
 		TimePoint: TimePoint{StartTime: time.Now().Unix(), EndTime: time.Now().Unix() + 10},
 	}
 
-	if result, err = collection.InsertOne(context.TODO(), record); err != nil {
+	if result, err = collection.InsertOne(context.TODO(), rec); err != nil {
 		fmt.Println(err)
 		return
 	}

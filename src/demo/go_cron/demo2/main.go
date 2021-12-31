@@ -6,67 +6,67 @@ import (
 	"utils/gorhill/cronexpr"
 )
 
-// CronJob represents a cron job
-type CronJob struct {
-	expr     *cronexpr.Expression
-	nextTime time.Time // expr.Next(now)
+// Job represents a cron job
+type Job struct {
+	expr *cronexpr.Expression
+	nxt  time.Time // expr.Next(now)
 }
 
 // need a scheduler goroutine to check all cron jobs: who is expired, execute it
 func main() {
 
 	var (
-		cronJob       *CronJob
-		expr          *cronexpr.Expression
-		now           time.Time
-		scheduleTable map[string]*CronJob // key: task name
+		job      *Job
+		exp      *cronexpr.Expression
+		now      time.Time
+		name2job map[string]*Job // key: job name
 	)
 
-	scheduleTable = make(map[string]*CronJob)
+	name2job = make(map[string]*Job)
 
 	// current time
 	now = time.Now()
 
 	// First, define two cron jobs
-	expr = cronexpr.MustParse("*/3 * * * * * *")
-	cronJob = &CronJob{
-		expr:     expr,
-		nextTime: expr.Next(now),
+	exp = cronexpr.MustParse("*/3 * * * * * *")
+	job = &Job{
+		expr: exp,
+		nxt:  exp.Next(now),
 	}
 	// register cron job
-	scheduleTable["job1"] = cronJob
+	name2job["job1"] = job
 
-	expr = cronexpr.MustParse("*/5 * * * * * *")
-	cronJob = &CronJob{
-		expr:     expr,
-		nextTime: expr.Next(now),
+	exp = cronexpr.MustParse("*/5 * * * * * *")
+	job = &Job{
+		expr: exp,
+		nxt:  exp.Next(now),
 	}
 	// register cron job
-	scheduleTable["job2"] = cronJob
+	name2job["job2"] = job
 
 	// start a goroutine
 	go func() {
 		var (
-			jobName string
-			cronJob *CronJob
-			now     time.Time
+			name string
+			job  *Job
+			now  time.Time
 		)
 
 		// check the schedule table every 100 milliseconds
 		for {
 			now = time.Now()
 
-			for jobName, cronJob = range scheduleTable {
+			for name, job = range name2job {
 				// check if the job is expired
-				if cronJob.nextTime.Before(now) || cronJob.nextTime.Equal(now) {
+				if job.nxt.Before(now) || job.nxt.Equal(now) {
 					// start a goroutine to execute the job
-					go func(jobName string) { // declare inner func
-						fmt.Println("execute:", jobName)
-					}(jobName) // pass jobName to inner func
+					go func(name string) { // declare inner func
+						fmt.Println("execute:", name)
+					}(name) // pass name to inner func
 
 					// update the next time
-					cronJob.nextTime = cronJob.expr.Next(now)
-					fmt.Println(jobName, "next execute time:", cronJob.nextTime)
+					job.nxt = job.expr.Next(now)
+					fmt.Println(name, "next execute time:", job.nxt)
 				}
 			}
 
@@ -78,6 +78,6 @@ func main() {
 		}
 	}()
 
-	// sleep so the child goroutine can run for 100 seconds
-	time.Sleep(100 * time.Second)
+	// sleep so the child goroutine can run for 60 seconds only
+	time.Sleep(60 * time.Second)
 }

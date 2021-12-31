@@ -18,20 +18,20 @@ type result struct {
 // kill that sub goroutine after 1 second, so it will not print hello
 func main() {
 	var (
-		ctx        context.Context
-		cancelFunc context.CancelFunc
-		cmd        *exec.Cmd
-		resultChan chan *result
-		res        *result
+		ctx    context.Context
+		cancel context.CancelFunc
+		cmd    *exec.Cmd
+		c      chan *result
+		res    *result
 	)
 
 	// create a result channel
-	resultChan = make(chan *result, 1000)
+	c = make(chan *result, 1000)
 
 	// context:   chan byte
-	// cancelFunc:  close(chan byte)
+	// cancel:  close(chan byte)
 
-	ctx, cancelFunc = context.WithCancel(context.TODO())
+	ctx, cancel = context.WithCancel(context.TODO())
 
 	go func() {
 		var (
@@ -44,7 +44,7 @@ func main() {
 		output, err = cmd.CombinedOutput()
 
 		// send result to main goroutine
-		resultChan <- &result{
+		c <- &result{
 			err:    err,
 			output: output,
 		}
@@ -54,10 +54,10 @@ func main() {
 	time.Sleep(1 * time.Second)
 
 	// cancel context
-	cancelFunc()
+	cancel()
 
 	// in main goroutine, wait for sub goroutine to exit, and print task execution result
-	res = <-resultChan
+	res = <-c
 
 	// print task execute result
 	fmt.Println(res.err, string(res.output))

@@ -8,10 +8,10 @@ import (
 
 func main() {
 	var (
-		expr     *cronexpr.Expression
-		err      error
-		now      time.Time
-		nextTime time.Time
+		exp *cronexpr.Expression
+		err error
+		now time.Time
+		nxt time.Time
 	)
 
 	// linux crontab
@@ -22,7 +22,7 @@ func main() {
 	// * * * * * * 2022 : every second of 2022
 
 	// run every 5 seconds
-	if expr, err = cronexpr.Parse("*/5 * * * * * *"); err != nil {
+	if exp, err = cronexpr.Parse("*/5 * * * * * *"); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -32,11 +32,11 @@ func main() {
 	// current time
 	now = time.Now()
 	// next time
-	nextTime = expr.Next(now)
+	nxt = exp.Next(now)
 
 	// wait for the timer to expire
-	time.AfterFunc(nextTime.Sub(now), func() { // run func after "nextTime - now" seconds
-		fmt.Println("run once and exit:", nextTime)
+	time.AfterFunc(nxt.Sub(now), func() { // run func after "nxt - now" seconds
+		fmt.Println("run once and exit:", nxt)
 	})
 
 	time.Sleep(5 * time.Second)

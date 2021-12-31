@@ -18,7 +18,7 @@ type TimePoint struct {
 
 // LogRecord record of log
 type LogRecord struct {
-	JobName   string    `bson:"jobName"`   // task name
+	JobName   string    `bson:"jobName"`   // job name
 	Command   string    `bson:"command"`   // shell command
 	Err       string    `bson:"err"`       // error info
 	Content   string    `bson:"content"`   // output of shell command
