@@ -1,0 +1,4 @@
+POST http://localhost:8070/job/save
+Content-Type: application/x-www-form-urlencoded
+
+job={"name":"job1","command":"echo hello","cronExpr":"*/5 * * * * * *"}
