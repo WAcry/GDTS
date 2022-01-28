@@ -1,0 +1,17 @@
+{
+  "apiPort": 8070,
+  "apiReadTimeout": 5000,
+  "apiWriteTimeout": 5000,
+  "etcdEndpoints": [
+    "192.168.83.140:2379"
+  ],
+  "etcdEndpointsCluster": [
+    "21.281.122.24:2379",
+    "21.281.122.39:2379",
+    "21.281.122.21:2379"
+  ],
+  "etcdDialTimeout": 5000,
+  "webroot": "src/manager/main/webroot",
+  "mongodbUri": "mongodb://192.168.83.140:27017",
+  "mongodbConnectTimeout": 5000
+}
