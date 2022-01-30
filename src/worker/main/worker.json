@@ -1,0 +1,17 @@
+{
+  "etcdEndpoints": [
+    "192.168.83.140:2379"
+  ],
+  "etcdEndpointsCluster": [
+    "21.281.122.24:2379",
+    "21.281.122.39:2379",
+    "21.281.122.21:2379"
+  ],
+  "etcdDialTimeout": 5000,
+  "mongodbUri": "mongodb://192.168.83.140:27017",
+  "mongodbConnectTimeout": 5000,
+  "jobLogBatchSize": 100,
+  "jobLogCommitTimeout": 1000,
+  "bashPath": "/bin/bash",
+  "winBashPath": "C:\\cygwin64\\bin\\bash.exe"
+}
