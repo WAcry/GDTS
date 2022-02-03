@@ -126,6 +126,7 @@ func (scheduler *WkScheduler) handleJobResult(result *common.JobExecuteResult) {
 		} else {
 			jobLog.Err = ""
 		}
+		LogSink.Append(jobLog)
 	}
 
 	fmt.Println("job is done:", result.ExecuteInfo.Job.Name, string(result.Output), result.Err)
