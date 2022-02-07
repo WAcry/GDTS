@@ -8,7 +8,7 @@ import (
 	"utils/coreos/etcd/mvcc/mvccpb"
 )
 
-// MstWorkerManager stores in /cron/workers/
+// MstWorkerManager stores in /gdts/workers/
 type MstWorkerManager struct {
 	client *clientv3.Client
 	kv     clientv3.KV
@@ -34,7 +34,7 @@ func (workerMgr *MstWorkerManager) ListWorkers() (workerArr []string, err error)
 	}
 
 	for _, kv = range getResp.Kvs {
-		// kv.Key : /cron/workers/192.168.2.1
+		// kv.Key : /gdts/workers/192.168.2.1
 		workerIP = common.ExtractWorkerIP(string(kv.Key))
 		workerArr = append(workerArr, workerIP)
 	}

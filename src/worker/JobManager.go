@@ -33,7 +33,7 @@ func (jobMgr *WkJobManager) watchJobs() (err error) {
 		jobEvent           *common.JobEvent
 	)
 
-	// get all jobs under /cron/jobs/, and get the current revision
+	// get all jobs under /gdts/jobs/, and get the current revision
 	if getResp, err = jobMgr.kv.Get(context.TODO(), common.JOB_SAVE_DIR, clientv3.WithPrefix()); err != nil {
 		return
 	}
@@ -51,7 +51,7 @@ func (jobMgr *WkJobManager) watchJobs() (err error) {
 	// 2, start listen from this revision
 	go func() {
 		watchStartRevision = getResp.Header.Revision + 1
-		// listen /cron/jobs/ dir
+		// listen /gdts/jobs/ dir
 		watchChan = jobMgr.watcher.Watch(context.TODO(), common.JOB_SAVE_DIR, clientv3.WithRev(watchStartRevision), clientv3.WithPrefix())
 		for watchResp = range watchChan {
 			for _, watchEvent = range watchResp.Events {
@@ -62,7 +62,7 @@ func (jobMgr *WkJobManager) watchJobs() (err error) {
 					}
 					jobEvent = common.BuildJobEvent(common.JOB_EVENT_SAVE, job)
 				case mvccpb.DELETE: // delete task event
-					// Delete /cron/jobs/job10
+					// Delete /gdts/jobs/job10
 					jobName = common.ExtractJobName(string(watchEvent.Kv.Key))
 
 					job = &common.Job{Name: jobName}
@@ -86,9 +86,9 @@ func (jobMgr *WkJobManager) watchKiller() {
 		jobName    string
 		job        *common.Job
 	)
-	// listen /cron/killer dir
+	// listen /gdts/killer dir
 	go func() {
-		// listen /cron/killer/ dir
+		// listen /gdts/killer/ dir
 		watchChan = jobMgr.watcher.Watch(context.TODO(), common.JOB_KILLER_DIR, clientv3.WithPrefix())
 		for watchResp = range watchChan {
 			for _, watchEvent = range watchResp.Events {

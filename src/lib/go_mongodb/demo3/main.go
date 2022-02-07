@@ -43,8 +43,8 @@ func main() {
 		return
 	}
 
-	// 2, choose database cron (init before)
-	database = client.Database("cron")
+	// 2, choose database gdts (init before)
+	database = client.Database("gdts")
 
 	// 3, choose collection log (init before)
 	collection = database.Collection("log")

@@ -107,7 +107,7 @@ func ExtractJobName(jobKey string) string {
 	return strings.TrimPrefix(jobKey, JOB_SAVE_DIR)
 }
 
-// ExtractKillerName e.g extract "job_x" from /cron/killer/job_x
+// ExtractKillerName e.g extract "job_x" from /gdts/killer/job_x
 func ExtractKillerName(killerKey string) string {
 	return strings.TrimPrefix(killerKey, JOB_KILLER_DIR)
 }

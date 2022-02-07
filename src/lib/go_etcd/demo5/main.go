@@ -35,8 +35,8 @@ func main() {
 	kv = clientv3.NewKV(client)
 
 	// delete key-value pair
-	if response, err = kv.Delete(context.TODO(), "/cron/job1", clientv3.WithPrevKV()); err != nil {
-		// withFromKey() + withLimit(2) + key = /cron/job1 : delete /cron/job1, /cron/job2
+	if response, err = kv.Delete(context.TODO(), "/gdts/job1", clientv3.WithPrevKV()); err != nil {
+		// withFromKey() + withLimit(2) + key = /gdts/job1 : delete /gdts/job1, /gdts/job2
 		fmt.Println(err)
 		return
 	}

@@ -89,7 +89,7 @@ func InitLogSink() (err error) {
 
 	LogSink = &WkLogSink{
 		client:         client,
-		logCollection:  client.Database("cron").Collection("log"),
+		logCollection:  client.Database("gdts").Collection("log"),
 		logChan:        make(chan *common.JobLog, 1000),
 		autoCommitChan: make(chan *common.LogBatch, 1000),
 	}

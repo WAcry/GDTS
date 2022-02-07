@@ -76,7 +76,7 @@ func main() {
 	kv = clientv3.NewKV(client)
 
 	// Put a key-value pair with lease, so that it expires after 10 seconds
-	if putResponse, err = kv.Put(context.TODO(), "/cron/lock1", "", clientv3.WithLease(leaseId)); err != nil {
+	if putResponse, err = kv.Put(context.TODO(), "/gdts/lock1", "", clientv3.WithLease(leaseId)); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -85,7 +85,7 @@ func main() {
 
 	// check if the key is expired every 2 seconds
 	for {
-		if getResponse, err = kv.Get(context.TODO(), "/cron/lock1"); err != nil {
+		if getResponse, err = kv.Get(context.TODO(), "/gdts/lock1"); err != nil {
 			fmt.Println(err)
 			return
 		}

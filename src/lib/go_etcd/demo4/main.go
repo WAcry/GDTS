@@ -33,10 +33,10 @@ func main() {
 	kv = clientv3.NewKV(client)
 
 	// write another job
-	kv.Put(context.TODO(), "/cron/job2", "{...}")
+	kv.Put(context.TODO(), "/gdts/job2", "{...}")
 
-	// read all keys with prefix /cron/
-	if response, err = kv.Get(context.TODO(), "/cron/", clientv3.WithPrefix()); err != nil {
+	// read all keys with prefix /gdts/
+	if response, err = kv.Get(context.TODO(), "/gdts/", clientv3.WithPrefix()); err != nil {
 		fmt.Println(err)
 	} else { // successfully get all keys
 		fmt.Println(response.Kvs, response.Count)

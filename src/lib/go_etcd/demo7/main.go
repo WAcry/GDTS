@@ -42,16 +42,16 @@ func main() {
 	// simulate etcd KV changes
 	go func() {
 		for {
-			kv.Put(context.TODO(), "/cron/job7", "i am job7")
+			kv.Put(context.TODO(), "/gdts/job7", "i am job7")
 
-			kv.Delete(context.TODO(), "/cron/job7")
+			kv.Delete(context.TODO(), "/gdts/job7")
 
 			time.Sleep(1 * time.Second)
 		}
 	}()
 
 	// get current value
-	if getResponse, err = kv.Get(context.TODO(), "/cron/job7"); err != nil {
+	if getResponse, err = kv.Get(context.TODO(), "/gdts/job7"); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -75,7 +75,7 @@ func main() {
 	})
 
 	// start watcher, canceled after 5 seconds
-	c = watcher.Watch(ctx, "/cron/job7", clientv3.WithRev(startRevision))
+	c = watcher.Watch(ctx, "/gdts/job7", clientv3.WithRev(startRevision))
 
 	// deal with event of key-value changes
 	for watchResponse = range c {

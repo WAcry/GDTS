@@ -34,7 +34,7 @@ func InitLogManager() (err error) {
 
 	LogManager = &MstLogManager{
 		client:        client,
-		logCollection: client.Database("cron").Collection("log"),
+		logCollection: client.Database("gdts").Collection("log"),
 	}
 	return
 }

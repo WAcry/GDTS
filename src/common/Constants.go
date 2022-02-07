@@ -2,16 +2,16 @@ package common
 
 const (
 	// JOB_SAVE_DIR job save dir
-	JOB_SAVE_DIR = "/cron/jobs/"
+	JOB_SAVE_DIR = "/gdts/jobs/"
 
 	// JOB_KILLER_DIR job killer dir
-	JOB_KILLER_DIR = "/cron/killer/"
+	JOB_KILLER_DIR = "/gdts/killer/"
 
 	// JOB_LOCK_DIR job lock dir
-	JOB_LOCK_DIR = "/cron/lock/"
+	JOB_LOCK_DIR = "/gdts/lock/"
 
 	// JOB_WORKER_DIR service register dir
-	JOB_WORKER_DIR = "/cron/workers/"
+	JOB_WORKER_DIR = "/gdts/workers/"
 
 	// JOB_EVENT_SAVE save job event
 	JOB_EVENT_SAVE = 1

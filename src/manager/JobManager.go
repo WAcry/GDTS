@@ -51,7 +51,7 @@ func InitJobManager() (err error) {
 }
 
 func (jobMgr *MstJobManager) SaveJob(job *common.Job) (oldJob *common.Job, err error) {
-	// save job into /cron/jobs/<jobname> as json
+	// save job into /gdts/jobs/<jobname> as json
 	var (
 		jobKey    string
 		jobValue  []byte
@@ -142,7 +142,7 @@ func (jobMgr *MstJobManager) KillJob(name string) (err error) {
 		leaseId        clientv3.LeaseID
 	)
 
-	// workers listen on /cron/workers/ and will kill the <jobname>
+	// workers listen on /gdts/workers/ and will kill the <jobname>
 	killerKey = common.JOB_KILLER_DIR + name
 
 	// create a lease outdated after 1 second for <jobname>
@@ -151,7 +151,7 @@ func (jobMgr *MstJobManager) KillJob(name string) (err error) {
 	}
 	leaseId = leaseGrantResp.ID
 
-	// put <jobname> into /cron/killer/<jobname>
+	// put <jobname> into /gdts/killer/<jobname>
 	if _, err = jobMgr.kv.Put(context.TODO(), killerKey, "", clientv3.WithLease(leaseId)); err != nil {
 		return
 	}

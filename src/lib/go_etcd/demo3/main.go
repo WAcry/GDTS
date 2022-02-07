@@ -32,7 +32,7 @@ func main() {
 	// used to get, put, delete, watch key-value pairs
 	kv = clientv3.NewKV(client)
 
-	if response, err = kv.Get(context.TODO(), "/cron/job1"); err != nil {
+	if response, err = kv.Get(context.TODO(), "/gdts/job1"); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(response.Kvs, response.Count)

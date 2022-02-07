@@ -35,7 +35,7 @@ func main() {
 	kv = clientv3.NewKV(client)
 
 	// create Op: operation
-	putOp = clientv3.OpPut("/cron/job8", "123456789")
+	putOp = clientv3.OpPut("/gdts/job8", "123456789")
 
 	// execute OP
 	if response, err = kv.Do(context.TODO(), putOp); err != nil {
@@ -52,7 +52,7 @@ func main() {
 	fmt.Println("write Revision:", response.Put().Header.Revision)
 
 	// create Op
-	getOp = clientv3.OpGet("/cron/job8")
+	getOp = clientv3.OpGet("/gdts/job8")
 
 	// execute OP
 	if response, err = kv.Do(context.TODO(), getOp); err != nil {

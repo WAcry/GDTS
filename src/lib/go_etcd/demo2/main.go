@@ -32,7 +32,7 @@ func main() {
 	// used to read and write key-value pairs
 	kv = clientv3.NewKV(client)
 
-	if response, err = kv.Put(context.TODO(), "/cron/job1", "bye", clientv3.WithPrevKV()); err != nil {
+	if response, err = kv.Put(context.TODO(), "/gdts/job1", "bye", clientv3.WithPrevKV()); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println("Revision:", response.Header.Revision)

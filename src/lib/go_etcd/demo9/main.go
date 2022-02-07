@@ -94,9 +94,9 @@ func main() {
 	// define transaction
 
 	// if key not exists
-	txn.If(clientv3.Compare(clientv3.CreateRevision("/cron/lock9"), "=", 0)).
-		Then(clientv3.OpPut("/cron/lock9", "xxx", clientv3.WithLease(leaseId))).
-		Else(clientv3.OpGet("/cron/lock9")) // else fail to lock
+	txn.If(clientv3.Compare(clientv3.CreateRevision("/gdts/lock9"), "=", 0)).
+		Then(clientv3.OpPut("/gdts/lock9", "xxx", clientv3.WithLease(leaseId))).
+		Else(clientv3.OpGet("/gdts/lock9")) // else fail to lock
 
 	// submit transaction
 	if txnResponse, err = txn.Commit(); err != nil {
