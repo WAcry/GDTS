@@ -34,6 +34,11 @@ func main() {
 		goto ERR
 	}
 
+	// init register module
+	if err = worker.InitRegister(); err != nil {
+		goto ERR
+	}
+
 	// start log module
 	if err = worker.InitLogSink(); err != nil {
 		goto ERR
