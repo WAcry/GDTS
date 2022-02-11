@@ -1,0 +1,15 @@
+[Unit]
+Description=gdts manager
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=ziyuan
+Group=ziyuan
+Restart=always
+ExecStart=/home/ziyuan/gdts/manager/main -config=/home/ziyuan/gdts/manager/manager.json
+WorkingDirectory=/home/ziyuan/gdts/manager
+
+[Install]
+WantedBy=multi-user.target

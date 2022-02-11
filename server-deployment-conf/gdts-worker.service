@@ -1,0 +1,15 @@
+[Unit]
+Description=gdts worker
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=ziyuan
+Group=ziyuan
+Restart=always
+ExecStart=/home/ziyuan/gdts/worker/main -config=/ziyuan/work/gdts/worker/worker.json
+WorkingDirectory=/home/ziyuan/gdts/worker
+
+[Install]
+WantedBy=multi-user.target
