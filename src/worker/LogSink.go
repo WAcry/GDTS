@@ -70,7 +70,7 @@ func (logSink *WkLogSink) writeLoop() {
 			// write timeout batch to mongodb
 			logSink.saveLogs(timeoutBatch)
 			// clear current batch
-			logBatch = nil // TODO
+			logBatch = nil
 		}
 	}
 }
