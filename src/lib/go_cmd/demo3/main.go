@@ -56,9 +56,9 @@ func main() {
 	// cancel context
 	cancel()
 
-	// in main goroutine, wait for sub goroutine to exit, and print task execution result
+	// in main goroutine, wait for sub goroutine to exit, and print job execution result
 	res = <-c
 
-	// print task execute result
+	// print job execute result
 	fmt.Println(res.err, string(res.output))
 }

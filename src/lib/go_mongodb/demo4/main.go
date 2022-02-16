@@ -10,7 +10,7 @@ import (
 	"utils/mongodb/mongo-go-driver/mongo/findopt"
 )
 
-// TimePoint time point of task execution
+// TimePoint time point of job execution
 type TimePoint struct {
 	StartTime int64 `bson:"startTime"`
 	EndTime   int64 `bson:"endTime"`

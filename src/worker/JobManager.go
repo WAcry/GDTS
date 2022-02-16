@@ -56,12 +56,12 @@ func (jobMgr *WkJobManager) watchJobs() (err error) {
 		for watchResp = range watchChan {
 			for _, watchEvent = range watchResp.Events {
 				switch watchEvent.Type {
-				case mvccpb.PUT: // save task event
+				case mvccpb.PUT: // save job event
 					if job, err = common.UnpackJob(watchEvent.Kv.Value); err != nil {
 						continue
 					}
 					jobEvent = common.BuildJobEvent(common.JOB_EVENT_SAVE, job)
-				case mvccpb.DELETE: // delete task event
+				case mvccpb.DELETE: // delete job event
 					// Delete /gdts/jobs/job10
 					jobName = common.ExtractJobName(string(watchEvent.Kv.Key))
 
@@ -93,7 +93,7 @@ func (jobMgr *WkJobManager) watchKiller() {
 		for watchResp = range watchChan {
 			for _, watchEvent = range watchResp.Events {
 				switch watchEvent.Type {
-				case mvccpb.PUT: // kill task event
+				case mvccpb.PUT: // kill job event
 					jobName = common.ExtractKillerName(string(watchEvent.Kv.Key))
 					job = &common.Job{Name: jobName}
 					jobEvent = common.BuildJobEvent(common.JOB_EVENT_KILL, job)

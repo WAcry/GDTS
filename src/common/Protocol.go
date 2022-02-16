@@ -8,7 +8,7 @@ import (
 	"utils/gorhill/cronexpr"
 )
 
-// Job Timed Task
+// Job Timed Job
 type Job struct {
 	Name     string `json:"name"`     //  job name
 	Command  string `json:"command"`  // shell command

@@ -7,10 +7,10 @@ import (
 )
 
 type WkScheduler struct {
-	jobEventChan      chan *common.JobEvent              // etcd task event channel
-	jobPlanTable      map[string]*common.JobSchedulePlan // task schedule planning table
-	jobExecutingTable map[string]*common.JobExecuteInfo  // task execution table
-	jobResultChan     chan *common.JobExecuteResult      // task result queue
+	jobEventChan      chan *common.JobEvent              // etcd job event channel
+	jobPlanTable      map[string]*common.JobSchedulePlan // job schedule planning table
+	jobExecutingTable map[string]*common.JobExecuteInfo  // job execution table
+	jobResultChan     chan *common.JobExecuteResult      // job result queue
 }
 
 var (
@@ -51,7 +51,7 @@ func (scheduler *WkScheduler) TryStartJob(jobPlan *common.JobSchedulePlan) {
 		jobExecuting   bool
 	)
 
-	// if a task runs for 1 minute but schedule every second, it will only run once to avoid concurrent issue
+	// if a job runs for 1 minute but schedule every second, it will only run once to avoid concurrent issue
 
 	// if job is running, skip this job scheduling
 	if jobExecuteInfo, jobExecuting = scheduler.jobExecutingTable[jobPlan.Job.Name]; jobExecuting {
@@ -146,7 +146,7 @@ func (scheduler *WkScheduler) scheduleLoop() {
 	// timer of schedule
 	scheduleTimer = time.NewTimer(scheduleAfter)
 
-	// timed task common.Job
+	// timed job common.Job
 	for {
 		select {
 		case jobEvent = <-scheduler.jobEventChan: // listen job change event

@@ -142,7 +142,7 @@ ERR:
 func handleJobLog(resp http.ResponseWriter, req *http.Request) {
 	var (
 		err        error
-		name       string // task name
+		name       string // job name
 		skipParam  string // start from which log
 		limitParam string // return how many logs
 		skip       int
