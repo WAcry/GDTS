@@ -19,7 +19,7 @@ Testing on Google Cloud Compute Engine
 
 2 CPUs, 4 GB RAM, 10 GB SSD, Ubuntu 20.04 LTS
 
-2 master + 10 workers + 3 etcd cluster + 2 mongodb
+2 manager + 10 workers + 3 etcd cluster + 2 mongodb
 
 10000 simple jobs (each done in 1 ms) every minute
 
@@ -99,13 +99,13 @@ of the task. If the lock was acquired before, the worker knows that some other w
 will simply skip it. Lease mechanism of etcd ensure that the lock is released after the task is finished or the worker
 dies.
 
-Master and Workers will not communicate directly. Both of them send and get information through etcd. Most data is
+Manager and Workers will not communicate directly. Both of them send and get information through etcd. Most data is
 stored in etcd,
 such as information of all jobs, registered healthy workers, locks, etc.
-With the watcher mechanism of etcd, worker can easily know new jobs assigned and the master can easily know the status
+With the watcher mechanism of etcd, worker can easily know new jobs assigned and the manager can easily know the status
 of workers.
 
-After executing a task, the worker will send the execution result to the mongodb too, so that the master can easily get
+After executing a task, the worker will send the execution result to the mongodb too, so that the manager can easily get
 the
 logs and offers an API for it.
 
@@ -113,7 +113,7 @@ The front end is implemented using JQuery and Bootstrap to provide a simple user
 
 To improve the availability of the system, we can use a load balancer to balance the load of the workers (e.g. LVS +
 keepalive).
-We can have several masters, each one with a stand-by. The image below shows the architecture:
+We can have several managers, each one with a stand-by. The image below shows the architecture:
 
 **[TODO]**
 
@@ -141,5 +141,7 @@ We can have several masters, each one with a stand-by. The image below shows the
 - `Go SDK 1.10.8`
 - `etcd (cluster) v3.3.8`
 - `GOPATH` need to set as `/GDTS`
+- Set up mongodb and etcd first, and edit the ip & port in worker.json and manager.json
+- simply run src/manager/main/manager.go and src/worker/main/worker.go
 - package is fixed using go mod and go vendor so no need to re-install
 - if on linux, you can use config files under `/server-deployment-conf/` to deploy server
