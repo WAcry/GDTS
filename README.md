@@ -13,6 +13,25 @@ Golang, Mongodb, etcd, JQuery + BootStrap, Docker, GCP
 - View the logs of a task on front end page
 - Can work in situations where network and machine failures are frequent, for it is distributed
 
+## Project Structure
+
+- `src` contains source code.
+  - `manager` contains code of job manager
+    - `main`
+      - `manager.go` entry point of job manager
+      - `manager.json` configuration of job manager
+      - `webroot` front end of job manager
+  - `worker` contains code of job worker
+    - `main`
+      - `worker.go` entry point of job worker
+      - `worker.json` configuration of job worker
+  - `common` contains common code shared by all modules
+  - `test` contains api examples in .http format, can be run in IntelliJ IDEs
+  - `lib` contains go examples interact with different tools
+  - `util` contains database drivers and cron expression parse tool
+- `software` contains linux programs
+- `server-deployment-conf` contains server deployment configuration on Linux
+
 ## Benchmark
 
 Testing on Google Cloud Compute Engine
@@ -27,12 +46,12 @@ Testing on Google Cloud Compute Engine
 
 **Ran for 72 hours with 0 errors**
 
-**[TODO]**
+![](https://raw.githubusercontent.com/Quakiq/tinyimages/main/img202207202352256.png)
 
 ## Demo Images
 
-**[TODO]**
-
+![](https://raw.githubusercontent.com/Quakiq/tinyimages/main/img202207210002555.png)
+![](https://raw.githubusercontent.com/Quakiq/tinyimages/main/img202207210003906.png)
 ## APIs
 
 #### schedule a new task
@@ -102,7 +121,8 @@ dies.
 Manager and Workers will not communicate directly. Both of them send and get information through etcd. Most data is
 stored in etcd,
 such as information of all jobs, registered healthy workers, locks, etc.
-With the watcher mechanism of etcd, worker can easily know new jobs assigned and the manager can easily know the status
+With the watcher mechanism of etcd, worker can easily know new jobs assigned and its status, and the manager can easily
+know the status
 of workers.
 
 After executing a task, the worker will send the execution result to the mongodb too, so that the manager can easily get
@@ -115,26 +135,7 @@ To improve the availability of the system, we can use a load balancer to balance
 keepalive).
 We can have several managers, each one with a stand-by. The image below shows the architecture:
 
-**[TODO]**
-
-## Project Structure
-
-- `src` contains source code.
-  - `manager` contains code of job manager
-    - `main`
-      - `manager.go` entry point of job manager
-      - `manager.json` configuration of job manager
-      - `webroot` front end of job manager
-  - `worker` contains code of job worker
-    - `main`
-      - `worker.go` entry point of job worker
-      - `worker.json` configuration of job worker
-  - `common` contains common code shared by all modules
-  - `test` contains api examples in .http format, can be run in IntelliJ IDEs
-  - `lib` contains go examples interact with different tools
-  - `util` contains database drivers and cron expression parse tool
-- `software` contains linux programs
-- `server-deployment-conf` contains server deployment configuration on Linux
+![](https://raw.githubusercontent.com/Quakiq/tinyimages/main/img202207210025752.png)
 
 ## Deployment Helps
 
@@ -143,5 +144,6 @@ We can have several managers, each one with a stand-by. The image below shows th
 - `GOPATH` need to set as `/GDTS`
 - Set up mongodb and etcd first, and edit the ip & port in worker.json and manager.json
 - simply run src/manager/main/manager.go and src/worker/main/worker.go
+- then you can visit http://localhost:8070 to view the frontend user interface.
 - package is fixed using go mod and go vendor so no need to re-install
 - if on linux, you can use config files under `/server-deployment-conf/` to deploy server
