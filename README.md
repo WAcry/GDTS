@@ -1,4 +1,4 @@
-# Go Distributed Task Scheduler (GDTS)
+# Go Distributed Task Scheduler
 
 This project implements a high performance, distributed task scheduler based on Golang.
 
